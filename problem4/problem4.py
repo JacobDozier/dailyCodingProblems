@@ -1,12 +1,11 @@
-arr = [-1, 0, -4, 1, 4, 2]
+arr = [-1, 0, -4, 3, 4, 0, 1]
+negArr = []
 missingNo = 0
 
-arr.sort()
-
-def separateNegatives(arr):
+def separateNegatives(arrIn):
     newArr = []
     negatvieArr = []
-    for number in arr:
+    for number in arrIn:
         if number >= 0:
             newArr.append(number)
         else:
@@ -15,22 +14,14 @@ def separateNegatives(arr):
             
 
 arr, negArr = separateNegatives(arr)
-
-# TODO Is the lowest value necessary?
-lowestValue = arr[-1]
-for number in arr:
-    if number > 0 and number < lowestValue:
-        lowestValue = number
-
-print(lowestValue)
+arr.sort()
 
 prevNum = arr[0]
 for value in arr:
-    if (value - prevNum) > 1 and prevNum == lowestValue:
-        missingNo = (lowestValue + 1)
+    if (value - prevNum) > 1:
+        missingNo = (prevNum + 1)
         break
-    # TODO This will always satisfy if 1 is in the list and exit the loop.
-    elif (value - prevNum) == 1 and prevNum == lowestValue:
+    elif 1 not in arr:
         missingNo = 1
         break
     else:
