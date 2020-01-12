@@ -1,6 +1,5 @@
-arr = [-1, 0, -4, 3, 4, 0, 1]
+arr = [-1, 0, -4, 2, 4, 0, 1]
 negArr = []
-missingNo = 0
 
 def separateNegatives(arrIn):
     newArr = []
@@ -11,22 +10,27 @@ def separateNegatives(arrIn):
         else:
             negatvieArr.append(number)
     return newArr, negatvieArr
-            
 
-arr, negArr = separateNegatives(arr)
-arr.sort()
+def findMissingNumber(sortedList):
+    prevNum = arr[0]
+    foundValue = 0
+    for value in sortedList:
+        if (value - prevNum) > 1:
+            foundValue = (prevNum + 1)
+            break
+        elif 1 not in arr:
+            foundValue = 1
+            break
+        else:
+            foundValue = value + 1
+        prevNum = value
+    return foundValue
 
-prevNum = arr[0]
-for value in arr:
-    if (value - prevNum) > 1:
-        missingNo = (prevNum + 1)
-        break
-    elif 1 not in arr:
-        missingNo = 1
-        break
-    else:
-        missingNo = value + 1
-    prevNum = value
+if __name__ == '__main__':
 
-print(str(negArr + arr))
-print(missingNo)
+    arr, negArr = separateNegatives(arr)
+    arr.sort()
+    missingNo = findMissingNumber(arr)
+
+    print(str(negArr + arr))
+    print(missingNo)
